@@ -1,40 +1,24 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-Hant">
 <head>
   <meta charset="UTF-8">
-  <title>Bible Quiz</title>
+  <title>聖經問答闖關遊戲</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Bible Quiz</h1>
-
-  <div id="inputSection">
-    <label>請輸入玩家名字：
-      <input type="text" id="nameInput" placeholder="例如：Kevin">
-    </label>
-    <button id="startBtn">開始遊戲</button>
+  <audio id="bg-music" src="music/background.mp3" loop></audio>
+  <div class="container parchment" id="main-container">
+    <h1>聖經問答闖關遊戲</h1>
+    <form id="player-form">
+      <label for="player-name">請輸入你的名字：</label>
+      <input type="text" id="player-name" maxlength="10" required>
+      <button type="submit">開始闖關</button>
+    </form>
+    <div id="game-area" class="hide"></div>
+    <div id="timer" class="hide"></div>
+    <ul id="leaderboard" class="hide"></ul>
+    <div class="blessing hide"></div>
   </div>
-
-  <div id="quizSection" style="display:none;">
-    <div id="question"></div>
-    <div id="options"></div>
-    <button id="nextBtn" disabled>下一題</button>
-  </div>
-
-  <div id="resultSection" style="display:none;">
-    <h2>遊戲結束</h2>
-    <div id="score"></div>
-    <ul id="answerList"></ul>
-  </div>
-
-  <div id="leaderboardSection" style="display:none;">
-    <h3>排行榜（前10名）</h3>
-    <table border="1">
-      <thead><tr><th>名次</th><th>玩家</th><th>分數</th></tr></thead>
-      <tbody id="leaderboard"></tbody>
-    </table>
-  </div>
-
   <script src="script.js"></script>
 </body>
 </html>
