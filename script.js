@@ -17,7 +17,7 @@ window.onload = async function() {
   const bgMusic = document.getElementById("bg-music");
   if (bgMusic) {
     bgMusic.volume = 0.3;
-    bgMusic.play().catch(()=>{}); // 部分瀏覽器自動播放限制
+    bgMusic.play().catch(() => {});
   }
   showLeaderboard();
 }
@@ -30,29 +30,26 @@ function startGame(e) {
     document.getElementById('player-name').focus();
     return;
   }
-  
-  // 初始化狀態
+
   currentScore = 0;
   currentLevel = 1;
   timeLeft = 600;
   answeredIndices.clear();
   usedQuestions = [];
-  
-  // 隱藏輸入區，顯示遊戲與計時器
+
   document.getElementById('player-form').classList.add('hide');
   document.getElementById('game-area').classList.remove('hide');
   document.getElementById('timer').classList.remove('hide');
   document.querySelector('.blessing').classList.add('hide');
   document.getElementById('leaderboard').classList.add('hide');
 
-  // 啟動計時器與顯示第一關題目
   startTimer();
   showNextLevel();
 }
 
 function startTimer() {
   updateTimer();
-  if(timerInterval) clearInterval(timerInterval);
+  if (timerInterval) clearInterval(timerInterval);
   timerInterval = setInterval(() => {
     timeLeft--;
     updateTimer();
@@ -67,7 +64,6 @@ function updateTimer() {
   let s = timeLeft % 60;
   const timerEl = document.getElementById('timer');
   timerEl.innerText = `剩餘時間：${m}:${s < 10 ? '0' : ''}${s}`;
-  // 可加色彩變化提醒
   if (timeLeft <= 60) {
     timerEl.style.color = '#d00000';
   } else {
@@ -88,7 +84,6 @@ function showQuestionsForLevel(level) {
   area.innerHTML = `<h2>第${level}關</h2><div id="questions"></div>`;
 
   let qindices = [];
-  // 挑選本關10個未出現過的題目索引
   while (qindices.length < 10) {
     let idx = Math.floor(Math.random() * questions.length);
     if (!answeredIndices.has(idx)) {
@@ -114,10 +109,10 @@ function showQuestionsForLevel(level) {
 
   area.querySelector("#questions").innerHTML = qHTML;
 
-  let answeredCount = 0; // 本關答題數
+  let answeredCount = 0;
 
   area.querySelectorAll('.options-list').forEach(ul => {
-    ul.onclick = function (event) {
+    ul.onclick = function(event) {
       if (event.target.tagName === 'LI' && !ul.classList.contains('answered')) {
         let parent = ul.closest('.question-block');
         let correct = parent.dataset.ans;
@@ -128,20 +123,16 @@ function showQuestionsForLevel(level) {
 
         if (val === correct) {
           event.target.classList.add('right');
-          playSfx('right');
           currentScore++;
         } else {
           event.target.classList.add('wrong');
           [...ul.children].forEach(li => {
             if (li.textContent === correct) li.classList.add('right');
           });
-          playSfx('wrong');
         }
 
-        // 禁止再次點擊該題選項
         [...ul.children].forEach(li => li.style.pointerEvents = 'none');
 
-        // 答完10題後自動跳下一關（延遲1200毫秒給玩家看標示）
         if (answeredCount === 10) {
           setTimeout(() => {
             currentLevel++;
@@ -151,12 +142,6 @@ function showQuestionsForLevel(level) {
       }
     };
   });
-}
-
-function playSfx(type) {
-  let sfx = new Audio(type === 'right' ? 'sfx/right.mp3' : 'sfx/wrong.mp3');
-  sfx.volume = 0.4;
-  sfx.play();
 }
 
 function finishGame() {
@@ -169,7 +154,6 @@ function finishGame() {
   saveScore();
   showLeaderboard();
 
-  // 顯示重新輸入名字的表單，方便重新遊玩
   document.getElementById('player-form').classList.remove('hide');
 }
 
@@ -186,7 +170,7 @@ function saveScore() {
   let data = JSON.parse(localStorage.getItem('bibleQuizRank') || '[]');
   data.push({ name: playerName, score: currentScore, timestamp: Date.now() });
   data.sort((a, b) => b.score - a.score);
-  data = data.slice(0, 10); // 只保留前10名
+  data = data.slice(0, 10);
   localStorage.setItem('bibleQuizRank', JSON.stringify(data));
 }
 
@@ -203,7 +187,7 @@ function showLeaderboard() {
 }
 
 function shuffle(arr) {
-  for (let i = arr.length - 1; i > 0; i--) {
+  for (let i = arr.length -1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [arr[i], arr[j]] = [arr[j], arr[i]];
   }
