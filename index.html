@@ -2,27 +2,28 @@
 <html lang="zh-TW">
 <head>
   <meta charset="UTF-8">
-  <title>聖經問答闖關遊戲</title>
+  <title>Bible Quiz Game</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <audio id="bgm" autoplay loop>
-    <source src="music/hallelujah.ogg" type="audio/ogg">
-    您的瀏覽器不支援音訊播放。
-  </audio>
+  <h1>Bible Quiz Game</h1>
 
-  <h1>聖經問答闖關遊戲</h1>
-  <div id="timer">剩餘時間：10:00</div>
-  <div id="quiz" class="question-box">
-    <div class="question" id="question">載入中...</div>
-    <div id="options"></div>
-    <button id="nextBtn" class="hidden">下一題</button>
+  <div id="name-section">
+    <label>請輸入你的名字：<input type="text" id="player-name" /></label>
+    <button id="start-btn">開始遊戲</button>
   </div>
-  <div id="result" class="hidden">
-    <h2>遊戲結束！</h2>
-    <p id="score"></p>
-    <p id="blessing"></p>
-    <button onclick="location.reload()">再玩一次</button>
+
+  <div id="game-area" class="question-box" style="display: none;"></div>
+
+  <div id="result" style="display: none;">
+    <h2>遊戲結束</h2>
+    <p id="final-score"></p>
+    <ul id="answer-review"></ul>
+  </div>
+
+  <div id="leaderboard" style="display: none;">
+    <h3>排行榜（前10名）</h3>
+    <ol id="leaderboard-list"></ol>
   </div>
 
   <script src="script.js"></script>
