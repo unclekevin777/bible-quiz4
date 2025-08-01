@@ -1,6 +1,6 @@
 let playerName = "";
 let currentLevel = 1;
-const totalLevels = 10;
+const totalLevels = 5;
 let currentScore = 0;
 let answeredIndices = new Set();
 let answersRecord = [];
