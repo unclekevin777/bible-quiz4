@@ -1,3 +1,4 @@
+console.log("✅ script.js 已經載入！");
 let playerName = "";
 let currentLevel = 1;
 const totalLevels = 10;
