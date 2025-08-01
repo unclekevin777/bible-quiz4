@@ -1,24 +1,30 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="zh-TW">
 <head>
   <meta charset="UTF-8">
   <title>聖經問答闖關遊戲</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <audio id="bg-music" src="music/background.mp3" loop></audio>
-  <div class="container parchment" id="main-container">
-    <h1>聖經問答闖關遊戲</h1>
-    <form id="player-form">
-      <label for="player-name">請輸入你的名字：</label>
-      <input type="text" id="player-name" maxlength="10" required>
-      <button type="submit">開始闖關</button>
-    </form>
-    <div id="game-area" class="hide"></div>
-    <div id="timer" class="hide"></div>
-    <ul id="leaderboard" class="hide"></ul>
-    <div class="blessing hide"></div>
+  <audio id="bgm" autoplay loop>
+    <source src="music/hallelujah.ogg" type="audio/ogg">
+    您的瀏覽器不支援音訊播放。
+  </audio>
+
+  <h1>聖經問答闖關遊戲</h1>
+  <div id="timer">剩餘時間：10:00</div>
+  <div id="quiz" class="question-box">
+    <div class="question" id="question">載入中...</div>
+    <div id="options"></div>
+    <button id="nextBtn" class="hidden">下一題</button>
   </div>
+  <div id="result" class="hidden">
+    <h2>遊戲結束！</h2>
+    <p id="score"></p>
+    <p id="blessing"></p>
+    <button onclick="location.reload()">再玩一次</button>
+  </div>
+
   <script src="script.js"></script>
 </body>
 </html>
