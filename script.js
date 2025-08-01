@@ -27,6 +27,7 @@ document.getElementById("start-btn").onclick = () => {
     });
 };
 
+console.log("✅ 題庫數量：", questions.length);
 function startGame() {
   currentLevel = 1;
   currentScore = 0;
@@ -42,6 +43,7 @@ function showQuestionsForLevel(level) {
 
   const available = questions.filter((_, idx) => !answeredIndices.has(idx));
   if (available.length < 10 || level > totalLevels) {
+    console.warn("⚠️ 題庫數量不足，無法開始遊戲");
     return endGame();
   }
 
